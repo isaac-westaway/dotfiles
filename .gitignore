@@ -13,6 +13,7 @@
 .config/*
 
 # ide stuff
+!.config/nvim
 !.config/nvim/init.lua
 
 # x stuff
