@@ -69,13 +69,50 @@ require("lazy").setup({
           				indent = { enable = true },
         			})
     			end
-		 }
+		},
+		{
+    			'nvim-lualine/lualine.nvim',
+    			dependencies = { 'nvim-tree/nvim-web-devicons' }
+		},
+		{
+			'akinsho/bufferline.nvim', 
+			version = "*", 
+			dependencies = 'nvim-tree/nvim-web-devicons'
+		},
+		{ 
+			"ellisonleao/gruvbox.nvim", 
+			priority = 1000 , 
+			config = true 
+		},
+		{
+    			"zaldih/themery.nvim",
+    			lazy = false,
+    			config = function()
+      				require("themery").setup({
+        				themes = {
+						{
+							name = "gruvbox",
+    							colorscheme = "gruvbox",
+    							before = [[
+      								-- All this block will be executed before apply "set colorscheme"
+      								vim.opt.background = "dark"
+    							]],
+						},
+					},
+      				})
+    			end
+  		}
   	},
   	install = { colorscheme = { "habamax" } },
 	checker = { enabled = false },
 })
 
-local builtin = require('telescope.builtin')
+vim.opt.termguicolors = true
+require("bufferline").setup{}
+require('lualine').setup()
+
+local telescope = require('telescope.builtin')
+local themery = require('themery')
 
 vim.keymap.set( {'n', 'i', 'v'}, '<C-b>', function() require("nvim-tree.api").tree.toggle({
 										path = nil,
@@ -84,5 +121,8 @@ vim.keymap.set( {'n', 'i', 'v'}, '<C-b>', function() require("nvim-tree.api").tr
 										update_root = false,
 									}) end)
 
+-- todo: set initial theme on startup
+
 vim.keymap.set( {'n', 'i', 'v'}, '<C-t>', '<esc><cmd>tabnew<cr>', { silent = true })
-vim.keymap.set( {'n', 'v'}, '<C-f>', builtin.live_grep, { desc = 'Telescope find files'} )
+vim.keymap.set( {'n', 'v'}, '<C-f>', telescope.live_grep, { desc = 'Telescope find files' } )
+vim.keymap.set( {'n', 'v'}, '<C-p>', '<esc><cmd>Themery<cr>', { desc = 'Open theme table' } )
