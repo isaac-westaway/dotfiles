@@ -3,14 +3,15 @@
 # git stuff
 !.gitignore
 
+!.config
+.config/*
+
 # terminal stuff
 !.zshrc
 !zsh
 !zsh/zsh-autocomplete.plugin.zsh
-
-# config
-!.config
-.config/*
+!.config/kitty
+!.config/kitty/*
 
 # ide stuff
 !.config/nvim
