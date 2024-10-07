@@ -1,0 +1,20 @@
+*
+
+# git stuff
+!.gitignore
+
+# terminal stuff
+!.zshrc
+!zsh
+!zsh/zsh-autocomplete.plugin.zsh
+
+# config
+!.config
+.config/*
+
+# ide stuff
+!.config/nvim/init.lua
+
+# x stuff
+!.xinitrc
+!picom.conf
