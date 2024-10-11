@@ -17,9 +17,6 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- This does not work very well, will fix later
--- require 'lspconfig'.zls.setup{}
-
 require("lazy").setup({
   	spec = {
 		{
@@ -84,6 +81,7 @@ require("lazy").setup({
 			priority = 1000 , 
 			config = true 
 		},
+		{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 		{
     			"zaldih/themery.nvim",
     			lazy = false,
@@ -98,18 +96,68 @@ require("lazy").setup({
       								vim.opt.background = "dark"
     							]],
 						},
+						{
+							name = "catppuccin",
+							colorscheme = "catppuccin",
+							before = [[
+							]],
+						},
 					},
       				})
     			end
-  		}
+  		},
+		{
+    			"lukas-reineke/indent-blankline.nvim",
+    			main = "ibl",
+			---@module "ibl"
+    			---@type ibl.config
+    			opts = {},
+		},
+		{
+ 			"neovim/nvim-lspconfig",   			
+			lazy = false,
+  			dependencies = {
+    				-- main one
+    				{ "ms-jpq/coq_nvim", branch = "coq" },
+
+    				-- 9000+ Snippets
+    				{ "ms-jpq/coq.artifacts", branch = "artifacts" },
+
+    				-- lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
+    				-- Need to **configure separately**
+    				{ 'ms-jpq/coq.thirdparty', branch = "3p" }
+  			},
+  			
+			init = function()
+    				vim.g.coq_settings = {
+        				auto_start = true, -- if you want to start COQ at startup
+        				-- Your COQ settings here
+    				}
+  			end,
+  			
+			config = function()
+    				-- Your LSP settings here
+  			end,
+}
   	},
   	install = { colorscheme = { "habamax" } },
 	checker = { enabled = false },
 })
 
+local lsp = require 'lspconfig'
+local coq = require 'coq'
+
+vim.o.number = true
+
+lsp.zls.setup{coq.lsp_ensure_capabilities()}
+
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 vim.opt.termguicolors = true
 require("bufferline").setup{}
-require('lualine').setup()
+require('lualine').setup{}
+require("ibl").setup{
+	indent = { char ="┊"},
+}
 
 local telescope = require('telescope.builtin')
 local themery = require('themery')
