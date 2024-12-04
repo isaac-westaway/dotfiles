@@ -2,6 +2,7 @@
 
 # git stuff
 !.gitignore
+!.README.md
 
 #configs directory
 !configs/
