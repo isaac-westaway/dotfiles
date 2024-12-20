@@ -1,8 +1,7 @@
 #!/bin/sh
 
 # clean up github clonse
-mv ~/dotfiles/configs ~/configs && rm -rf dotfiles 
-
+mv ~/dotfiles/configs ~/configs
 
 echo "updating symlinks"
 
@@ -12,7 +11,7 @@ ln -s ~/configs/vim/.vimrc ~/.vimrc
 [ -L ~/.vim ] && rm -rf ~/.vim
 ln -s ~/configs/vim/.vim ~/.vim
 
-[ -L ~/.zshrc ] && rm .zshrc	
+[ -L ~/.zshrc ] && rm ~/.zshrc	
 ln -s ~/configs/zsh/.zshrc ~/.zshrc
 
 [ -L ~/zsh ] && rm -f ~/zsh
@@ -33,3 +32,4 @@ fi
 		
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+rm -rf dotfiles
