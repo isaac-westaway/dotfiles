@@ -14,11 +14,14 @@ ln -s ~/configs/vim/.vim ~/.vim
 [ -L ~/.zshrc ] && rm ~/.zshrc	
 ln -s ~/configs/zsh/.zshrc ~/.zshrc
 
+[ -L ~/.zprofile ] && rm ~/.zprofile
+ln -s ~/configs/zsh/.zprofile ~/.zprofile
+
 [ -L ~/zsh ] && rm -f ~/zsh
 ln -s ~/configs/zsh/zsh ~/zsh
 
 echo "doing build files"
-if [ -d ~/build_files]; then
+if [ -d ~/build_files ]; then
 	cd ~/build_files
 else
 	mkdir ~/build_files
