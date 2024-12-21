@@ -1,4 +1,7 @@
 #!/bin/sh
+
+#test
+
 mv ~/dotfiles/configs ~/configs &&
 rm -rf dotfiles 
 
